@@ -1,0 +1,30 @@
+ body {
+    margin: 0px;
+    font-family: Roboto, sans-serif;  
+    background-color: whitesmoke;
+    font-weight: 200;
+  }
+
+header {
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    align-items: center;
+    padding: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: #990033;
+    color: white;
+    box-shadow: 0 2px 4px 0 black;
+}
+
+header > h1 {
+    padding-left: 2rem;
+}
+
+#nav-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+
