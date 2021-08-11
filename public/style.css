@@ -2,12 +2,12 @@
     margin: 0px;
     font-family: Roboto, sans-serif;  
     background-color: whitesmoke;
-    font-weight: 200;
+    font-weight: 100;
   }
 
 header {
     display: grid;
-    grid-template-columns: 50% 1fr;
+    grid-template-columns: 40% 1fr;
     align-items: center;
     padding: 1rem;
     padding-top: 0;
@@ -18,12 +18,14 @@ header {
 }
 
 header > h1 {
-    padding-left: 2rem;
+    font-size: 25px;
+    padding-left: 8rem;
 }
 
 #nav-bar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    padding-right: 8rem;
 }
 
 

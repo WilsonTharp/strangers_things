@@ -10,10 +10,10 @@ const Header = () => {
           borderRadius: 3,
           border: 0,
           color: 'white',
-          height: 80,
+          height: 65,
           padding: '0 30px',
           boxShadow: 'black',
-          fontSize: '1.3rem'
+          fontSize: '1rem'
         },
         label: {
           textTransform: 'capitalize',
