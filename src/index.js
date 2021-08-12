@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import './style.css'
 
 import {
     // Header,
@@ -11,6 +12,7 @@ import {
 
   const App = () => {
     return <div className="app">
+        {/* <Header /> */}
         <Login />
     </div>
   }
