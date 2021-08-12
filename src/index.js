@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './style.css'
 
 import {
-    // Header,
+    Header,
     // Home,
     Login
     // Posts,
@@ -12,9 +12,11 @@ import {
 
   const App = () => {
     return <div className="app">
-        {/* <Header /> */}
+        <Header />
         <Login />
     </div>
   }
+
+
 
 ReactDOM.render(<App />, document.getElementById('app'))
