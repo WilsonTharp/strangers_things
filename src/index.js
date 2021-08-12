@@ -10,16 +10,14 @@ import {
     // Profile
   } from './components';
 
-
   const App = () => {
-
-
-
+  
     return (
+      <div className="app">
         <Header />
+        {/* <Login /> */}
+      </div>
     )
   }
 
-ReactDOM.render(
-    <App />,
- document.getElementById('root'))
+ReactDOM.render( <App />, document.getElementById('app'))
