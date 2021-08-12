@@ -5,7 +5,8 @@ import './style.css'
 import {
     Header,
     // Home,
-    Login
+    Login,
+    SignUp
     // Posts,
     // Profile
   } from './components';
