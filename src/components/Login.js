@@ -1,5 +1,5 @@
-import React from "react"
-
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Login = (props) => {
     return (
@@ -8,7 +8,7 @@ const Login = (props) => {
         <input className= "loginInput" placeholder="Username"></input>
         <input className= "loginInput" placeholder="Password"></input>
         <button className= "loginButton">Log In</button>
-        <a href="Some Link Goes Here">Don't have an account? Sign Up</a>
+        <Link to="/signup">Don't have an account? Sign Up</Link> 
         </div>
     )
 }
