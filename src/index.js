@@ -14,6 +14,7 @@ import {
     return <div className="app">
         <Header />
         <Login />
+        {/* <Home /> */}
     </div>
   }
 
