@@ -3,6 +3,13 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom';
+
 const Header = () => {
     const StyledButton = withStyles({
         root: {
@@ -24,10 +31,12 @@ const Header = () => {
         <header>
            <h1>Stranger Things</h1>
            <div id="nav-bar">
-               <StyledButton>Home</StyledButton>
-               <StyledButton>Posts</StyledButton>
-               <StyledButton>Profile</StyledButton> 
-               <StyledButton>Log in</StyledButton> 
+          
+              <StyledButton>Home</StyledButton>
+              <StyledButton>Posts</StyledButton>
+              <Link to ="/profile"> <StyledButton>Profile</StyledButton> </Link> 
+              <Link to ="/login"><StyledButton>Log in</StyledButton></Link>
+              
             </div> 
         </header>
     )

@@ -3,32 +3,45 @@ import ReactDOM from 'react-dom';
 import './style.css'
 
 import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+
+import {
     Header,
     // Home,
-    Login
-    // Posts,
-    // Profile
+    Login,
+    SignUp,
+    // Posts
+    Profile
   } from './components';
 
-  import {
-    fetchUserPosts
-  } from './API'
 
   const App = () => {
-    useEffect(() => {
-      fetchUserPosts()
-      .then(data => {
-        console.log(data.data.posts);
-      })
-    },[])
-
-    return <div className="app">
+    return (
+      <>
+    
+    <div className="app">
+      
         <Header />
-        <Login />
-        {/* <Home /> */}
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="/profile">
+            <Profile />
+          </Route>
+        </Switch>
+      
     </div>
+    </>
+    )
   }
 
 
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<Router><App /></Router>, document.getElementById('app'))
