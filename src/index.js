@@ -10,10 +10,10 @@ import {
 
 import {
     Header,
-    // Home,
+    Home,
     Login,
     SignUp,
-    // Posts
+    Posts,
     Profile
   } from './components';
 
@@ -34,6 +34,12 @@ import {
           </Route>
           <Route path="/profile">
             <Profile />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/posts">
+            <Posts />
           </Route>
         </Switch>
       
