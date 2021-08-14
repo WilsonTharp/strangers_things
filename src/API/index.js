@@ -1,7 +1,7 @@
 export const BASE_URL = 'https://strangers-things.herokuapp.com'
 
 
-// export const BASE_URL = 
+
 
 // async function getToken() {
 //     try {

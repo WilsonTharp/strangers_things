@@ -32,10 +32,10 @@ const Header = () => {
            <h1>Stranger Things</h1>
            <div id="nav-bar">
           
-                <StyledButton>Home</StyledButton>
-                <StyledButton>Posts</StyledButton>
-                <StyledButton to="/profile">Profile</StyledButton> 
-                <StyledButton to="/login">Log in</StyledButton>
+              <StyledButton>Home</StyledButton>
+              <StyledButton>Posts</StyledButton>
+              <Link to ="/profile"> <StyledButton>Profile</StyledButton> </Link> 
+              <Link to ="/login"><StyledButton>Log in</StyledButton></Link>
               
             </div> 
         </header>
