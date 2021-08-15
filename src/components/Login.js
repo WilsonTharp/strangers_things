@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 const Login = (props) => {
     
-    const [user, setUser] = useState({usernam: '', password: ''});
+    const [user, setUser] = useState({username: '', password: ''});
 
 
-    // function handleSubmit(event) {
-    //     event.preventDefault();
-    // }
+    function handleSubmit(event) {
+        event.preventDefault();
+    }
     
     return (
         <div id="loginPage">
@@ -33,7 +33,7 @@ const Login = (props) => {
                            style= {{width: 350, marginBottom: 20}} />
             </div>
             <button className= "loginButton">Log In</button>
-            <a href="Some Link Goes Here">Don't have an account? Sign Up</a>
+            <Link to="/signup">Don't have an account? Sign Up</Link>
         </div>
     )
 }

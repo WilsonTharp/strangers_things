@@ -31,9 +31,8 @@ const Header = () => {
         <header>
            <h1>Stranger Things</h1>
            <div id="nav-bar">
-          
-              <StyledButton>Home</StyledButton>
-              <StyledButton>Posts</StyledButton>
+              <Link to="/home" style={{textDecorationLine: 'none'}}><StyledButton>Home</StyledButton></Link>
+              <Link to="/posts" style={{textDecorationLine: 'none'}}><StyledButton>Posts</StyledButton></Link>
               <Link to ="/profile" style={{textDecorationLine: 'none'}}> <StyledButton>Profile</StyledButton> </Link> 
               <Link to ="/login" style={{textDecorationLine: 'none'}}><StyledButton>Log in</StyledButton></Link>
               
