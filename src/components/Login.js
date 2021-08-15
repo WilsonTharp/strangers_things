@@ -1,11 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { TextField } from "@material-ui/core";
-
 import { Link } from "react-router-dom";
 
 const Login = (props) => {
     
-    // const [user, setUser] = useState({usernam: '', password: ''});
+    const [user, setUser] = useState({usernam: '', password: ''});
 
 
     // function handleSubmit(event) {

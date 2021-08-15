@@ -20,7 +20,7 @@ const Header = () => {
           height: 65,
           padding: '0 30px',
           boxShadow: 'black',
-          fontSize: '1rem'
+          fontSize: '1rem',
         },
         label: {
           textTransform: 'capitalize',
@@ -34,8 +34,8 @@ const Header = () => {
           
               <StyledButton>Home</StyledButton>
               <StyledButton>Posts</StyledButton>
-              <Link to ="/profile"> <StyledButton>Profile</StyledButton> </Link> 
-              <Link to ="/login"><StyledButton>Log in</StyledButton></Link>
+              <Link to ="/profile" style={{textDecorationLine: 'none'}}> <StyledButton>Profile</StyledButton> </Link> 
+              <Link to ="/login" style={{textDecorationLine: 'none'}}><StyledButton>Log in</StyledButton></Link>
               
             </div> 
         </header>
