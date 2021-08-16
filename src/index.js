@@ -22,6 +22,7 @@ import {
   const App = () => {
 
     const [userPosts, setUserPosts] = useState([]);
+    const [isLoggedin, setIsLoggedin] = useState(true);
 
     useEffect(() => {
       fetchUserPosts()
@@ -38,7 +39,8 @@ import {
     
     <div className="app">
       
-        <Header />
+        <Header isLoggedin={isLoggedin}
+                setIsLoggedin={setIsLoggedin}/>
         <Switch>
           <Route path="/login">
             <Login />

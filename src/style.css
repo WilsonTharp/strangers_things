@@ -80,7 +80,22 @@ header > h1 {
     text-align: center;
 }
 
-#posts-page {
+.posts-header {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.create-post {
+    display: flex;
+    justify-content: center;
+    margin-left: 28rem;
+    margin-right: 28rem;
+    margin-top: 1rem;
+    padding-top: .5rem;
+    padding-bottom: 1.5rem;
+    background-color: white;
+    box-shadow: 0 .001rem 2px 0px black;
 }
 
 .user-post {

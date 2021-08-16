@@ -10,7 +10,7 @@ import {
   Switch
 } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({isLoggedin, setIsLoggedin}) => {
     const StyledButton = withStyles({
         root: {
           background: '#990033',
@@ -33,7 +33,12 @@ const Header = () => {
            <div id="nav-bar">
               <StyledButton component={Link} to="/home">Home</StyledButton>
               <StyledButton component={Link} to="/posts">Posts</StyledButton>
-              <StyledButton component={Link} to="/profile">Profile</StyledButton>
+              {
+                isLoggedin ?
+                <StyledButton component={Link} to="/profile">Profile</StyledButton> 
+                :
+                null
+              }
               <StyledButton component={Link} to="/login">Log in</StyledButton>
             </div> 
         </header>
