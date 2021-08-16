@@ -18,7 +18,7 @@ const Login = (props) => {
                 <TextField id="outlined-basic-1"
                            label="Username"
                            name="username"
-                           value={user.username}
+                        //    value={user.username}
                            variant="outlined"
                            type="text"
                            style= {{width: 350, marginBottom: 20, marginTop: 10}} />
@@ -27,7 +27,7 @@ const Login = (props) => {
                 <TextField id="outlined-basic=2" 
                            label="Password"
                            name="password"
-                           value={user.password}
+                        //    value={user.password}
                            variant="outlined"
                            type= "password"
                            style= {{width: 350, marginBottom: 20}} />

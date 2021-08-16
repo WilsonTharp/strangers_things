@@ -79,3 +79,57 @@ header > h1 {
     grid-template-columns: 1fr;
     text-align: center;
 }
+
+#posts-page {
+}
+
+.user-post {
+    margin: 2rem;
+    margin-left: 12rem;
+    margin-right: 12rem;
+    padding: 5px;
+    padding-left: 1.5rem;
+    background-color: white;
+    box-shadow: 0 .001rem 2px 0px black;
+}
+
+.featured-post {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  
+    backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.4);
+    
+    font-family: 'Roboto', sans-serif;
+}
+
+.featured-post > .post {
+    min-width: 480px;
+    min-height: 70%;
+    padding: 2rem;
+    overflow: scroll;
+  
+    box-shadow: 0 2px 8px black;
+    background: white;
+  
+    position: absolute;
+    max-height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.post-messages > h3 {
+    background-color: lightgrey;
+    text-align: center;
+    box-shadow: 0 .04rem 1px black;
+}
+
+.message {
+    background-color: lightgrey;
+    box-shadow: 0 2px 8px black;
+}

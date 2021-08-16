@@ -17,8 +17,22 @@ import {
     Profile
   } from './components';
 
+  import { fetchUserPosts } from './API';
 
   const App = () => {
+
+    const [userPosts, setUserPosts] = useState([]);
+
+    useEffect(() => {
+      fetchUserPosts()
+        .then(userPosts => {
+         setUserPosts(userPosts.data.posts)
+       })
+      .catch(error => {
+        throw error
+      });
+    }, []);
+
     return (
       <>
     
@@ -39,7 +53,7 @@ import {
             <Home />
           </Route>
           <Route path="/posts">
-            <Posts />
+            <Posts userPosts={userPosts}/>
           </Route>
         </Switch>
       

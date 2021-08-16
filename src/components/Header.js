@@ -31,11 +31,10 @@ const Header = () => {
         <header>
            <h1>Stranger Things</h1>
            <div id="nav-bar">
-              <Link to="/home" style={{textDecorationLine: 'none'}}><StyledButton>Home</StyledButton></Link>
-              <Link to="/posts" style={{textDecorationLine: 'none'}}><StyledButton>Posts</StyledButton></Link>
-              <Link to ="/profile" style={{textDecorationLine: 'none'}}> <StyledButton>Profile</StyledButton> </Link> 
-              <Link to ="/login" style={{textDecorationLine: 'none'}}><StyledButton>Log in</StyledButton></Link>
-              
+              <StyledButton component={Link} to="/home">Home</StyledButton>
+              <StyledButton component={Link} to="/posts">Posts</StyledButton>
+              <StyledButton component={Link} to="/profile">Profile</StyledButton>
+              <StyledButton component={Link} to="/login">Log in</StyledButton>
             </div> 
         </header>
     )
