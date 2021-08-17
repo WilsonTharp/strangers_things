@@ -19,7 +19,7 @@ const Login = ({logInRequest}) => {
     function handleSubmit(event) {
         event.preventDefault();
         logInRequest(user); 
-        // if (result.success===true){ //how to use authentication data here to route to different pages depending on result?
+        // if (localStorage.getItem("success")===true){ 
         //     history.push('/home')
         // } else {
         //     return (

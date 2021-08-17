@@ -29,6 +29,7 @@ export async function logInRequest(user){
             console.log(result)
             localStorage.setItem('token', result.data.token);
             localStorage.setItem('message', result.data.message);
+            localStorage.setItem('success', result.success);
         })
     } catch (error) {
         alert (error);
@@ -51,6 +52,7 @@ export async function createNewUser(newUser) {
     .then(result => {
         localStorage.setItem('message', result.data.message);
         localStorage.setItem('token', result.data.token);
+        localStorage.setItem('success', result.success);
         console.log(result);
     })
     .catch(console.error);
