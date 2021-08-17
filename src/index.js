@@ -17,6 +17,11 @@ import {
     Profile
   } from './components';
 
+  import {
+    createNewUser,
+    logInRequest
+  } from './API/index.js'
+
 
   const App = () => {
     return (
@@ -27,10 +32,10 @@ import {
         <Header />
         <Switch>
           <Route path="/login">
-            <Login />
+            <Login logInRequest={logInRequest} />
           </Route>
           <Route path="/signup">
-            <SignUp />
+            <SignUp createNewUser={createNewUser} />
           </Route>
           <Route path="/profile">
             <Profile />
