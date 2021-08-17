@@ -51,8 +51,9 @@ import {
           <Route path="/profile">
             <Profile />
           </Route>
-          <Route path="/home">
-            <Home />
+          <Route exact path="/">
+            <Home isLoggedin={isLoggedin}
+                setIsLoggedin={setIsLoggedin}/>
           </Route>
           <Route path="/posts">
             <Posts userPosts={userPosts}/>

@@ -58,7 +58,8 @@ const Posts = ({userPosts}) => {
             </div>
             {
                 !featuredPost ?
-                <></> :
+                <></> 
+                :
                 <FeaturedPost featuredPost={featuredPost}
                               setFeaturedPost={setFeaturedPost}/>
             }       

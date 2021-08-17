@@ -4,9 +4,9 @@ import { TextField } from '@material-ui/core';
 const SignUp = (props) => {
     return (
         <div id="signUp">
-        <h1>Sign Up</h1>
-        <div className="loginInputs">
-            <p>Create a Username</p>
+            <h1>Sign Up</h1>
+            <div className="loginInputs">
+                <p>Create a Username</p>
                 <TextField id="outlined-basic-1"
                            label="Username"
                            name="username"
@@ -25,7 +25,7 @@ const SignUp = (props) => {
                            type= "password"
                            style= {{width: 350, marginBottom: 20}} />
             </div>
-        <button className= "loginButton">Sign Up</button>
+            <button className= "loginButton">Sign Up</button>
         </div>
     )
 }

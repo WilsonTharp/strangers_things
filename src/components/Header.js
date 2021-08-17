@@ -31,7 +31,7 @@ const Header = ({isLoggedin, setIsLoggedin}) => {
         <header>
            <h1>Stranger Things</h1>
            <div id="nav-bar">
-              <StyledButton component={Link} to="/home">Home</StyledButton>
+              <StyledButton component={Link} to="/">Home</StyledButton>
               <StyledButton component={Link} to="/posts">Posts</StyledButton>
               {
                 isLoggedin ?

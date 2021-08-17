@@ -15,12 +15,13 @@ const FeaturedPost = ({featuredPost, setFeaturedPost}) => {
             <h3><b>Seller: </b>{featuredPost.author.username}</h3>
             <h4><b>Location: </b>{featuredPost.location}</h4>
             <div className="post-messages">
-                {featuredPost.messages.map((message, i) => {
-                        return (
-                            <div key={i} className="message">
-                                <p>{message}</p>
-                            </div>
-                        )
+                {
+                featuredPost.messages.map((message, i) => {
+                    return (
+                        <div key={i} className="message">
+                            <p>{message}</p>
+                        </div>
+                    )
                 })}
             <h3>Message User about this Post</h3>
             <TextField id="standard-basic"

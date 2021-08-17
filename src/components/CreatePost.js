@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { FaTimesCircle } from 'react-icons/fa'
 import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
 
-const CreatePost = ({CreatePost, setCreatePost}) => {
+const CreatePost = ({createPost, setCreatePost}) => {
     return (
         <div className="create-post">
             <div>
