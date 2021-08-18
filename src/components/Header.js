@@ -11,6 +11,12 @@ import {
 } from 'react-router-dom';
 
 const Header = ({isLoggedin, setIsLoggedin}) => {
+
+  function logOut(event) {
+    localStorage.removeItem('token');
+    setIsLoggedin(false);
+  }
+
     const StyledButton = withStyles({
         root: {
           background: '#990033',
@@ -35,11 +41,13 @@ const Header = ({isLoggedin, setIsLoggedin}) => {
               <StyledButton component={Link} to="/posts">Posts</StyledButton>
               {
                 isLoggedin ?
+                <>
                 <StyledButton component={Link} to="/profile">Profile</StyledButton> 
+                <StyledButton component={Link} to="/" onClick={logOut}>Log out</StyledButton>
+                </>
                 :
-                null
+                <StyledButton component={Link} to="/login">Log in</StyledButton>
               }
-              <StyledButton component={Link} to="/login">Log in</StyledButton>
             </div> 
         </header>
     )

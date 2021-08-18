@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from '@material-ui/core/Button';
 import { TextField } from "@material-ui/core";
-import FeaturedPost from './FeaturedPost';
-import CreatePost from './CreatePost';
+import {
+    CreatePost,
+    FeaturedPost,
+    UserPost
+} from './index.js'
 
-const Posts = ({userPosts}) => {
+
+const Posts = ({userPosts, setUserPosts, isLoggedin, setIsLogggedin}) => {
     const [featuredPost, setFeaturedPost] = useState(null);
     const [createPost, setCreatePost] = useState(null);
 
-    console.log(userPosts);
+    console.log(userPosts)
     return (
         <div id="posts-page">
             <div className="posts-header">
@@ -16,7 +20,9 @@ const Posts = ({userPosts}) => {
                 <TextField variant="filled"
                            label="Search"
                            style={{marginTop: '.6rem', marginLeft: '2rem', marginRight: '2rem', width: '20rem'}}/>
-                <Button variant="outlined"
+                {
+                    isLoggedin ? 
+                    <Button variant="outlined"
                         color="primary"
                         style={{height: '3rem', marginTop: '.8rem'}}
                         onClick={(event) => {
@@ -24,36 +30,37 @@ const Posts = ({userPosts}) => {
                             setCreatePost(true);
                         }}>
                         Create a Post</Button>
+                        :
+                        ''
+                }
             </div>
             {
                 createPost ? 
                 <CreatePost createPost={createPost}
-                            setCreatePost={setCreatePost}/>
+                            setCreatePost={setCreatePost}
+                            userPosts={userPosts}
+                            setUserPosts={setUserPosts}/>
                 :
                 <>
                 </>
             }
             <div className="post-list">
             {
-            userPosts.map((post, i) => {
-                return (
-                    <div className="user-post" key={i}>
-                        <h2>{post.title}</h2>
-                        <p>{post.description}</p>
-                        <h4><b>Price: </b>{post.price}</h4>
-                        <h3><b>Seller: </b>{post.author.username}</h3>
-                        <h4><b>Location: </b>{post.location}</h4>
-                        <Button variant="outlined"
-                                color="primary"
-                                style={{marginBottom:"1rem"}}
-                                value={this}
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    setFeaturedPost(post);
-                                }}>Expand post</Button>
-                    </div>
-                )
-                })
+            userPosts.map((post, i) => 
+                <UserPost post={post}
+                          title={post.title}
+                          description={post.description}
+                          price={post.price}
+                          username={post.author.username}
+                          locaion={post.location}
+                          featuredPost={featuredPost}
+                          setFeaturedPost={setFeaturedPost}
+                          key={i}
+                          isAuthor={post.isAuthor}
+                          postId={post._id}
+                          setUserPosts={setUserPosts}
+                          userPosts={userPosts} />
+            )
              }   
             </div>
             {
@@ -61,7 +68,8 @@ const Posts = ({userPosts}) => {
                 <></> 
                 :
                 <FeaturedPost featuredPost={featuredPost}
-                              setFeaturedPost={setFeaturedPost}/>
+                              setFeaturedPost={setFeaturedPost}
+                              isLoggedin={isLoggedin}/>
             }       
         </div>
     )

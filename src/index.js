@@ -18,6 +18,7 @@ import {
   } from './components';
 
   import {
+    BASE_URL,
     createNewUser,
     logInRequest
   } from './API/index.js'
@@ -26,17 +27,48 @@ import {
   const App = () => {
 
     const [userPosts, setUserPosts] = useState([]);
-    const [isLoggedin, setIsLoggedin] = useState(true);
+    const [isLoggedin, setIsLoggedin] = useState(null);
+    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
-      fetchUserPosts()
-        .then(userPosts => {
-         setUserPosts(userPosts.data.posts)
-       })
-      .catch(error => {
-        throw error
-      });
+      {localStorage.getItem('token') ? setIsLoggedin(true) : setIsLoggedin(false)};
     }, []);
+
+    useEffect(() => {
+      try {
+        const token = localStorage.getItem('token');
+        fetch(`${BASE_URL}posts`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+        }) .then(response => response.json())
+           .then(result => {
+               setUserPosts(result.data.posts);
+           })        
+    } catch(error) {
+        throw error;
+    }
+    },[])
+
+    useEffect(() => {
+      try {
+        const token = localStorage.getItem('token');
+        fetch(`${BASE_URL}users/me`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }, 
+        }) .then(response => response.json())
+           .then(result => {
+               setCurrentUser(result.data)
+           })
+    } catch (error) {
+        console.error(error);
+    }
+    }, [])
+
+    console.log(currentUser)
 
     return (
       <>
@@ -47,7 +79,9 @@ import {
                 setIsLoggedin={setIsLoggedin}/>
         <Switch>
           <Route path="/login">
-            <Login logInRequest={logInRequest} />
+            <Login logInRequest={logInRequest}
+                   isLoggedin={isLoggedin}
+                   setIsLoggedin={setIsLoggedin} />
           </Route>
           <Route path="/signup">
             <SignUp createNewUser={createNewUser} />
@@ -60,7 +94,10 @@ import {
                 setIsLoggedin={setIsLoggedin}/>
           </Route>
           <Route path="/posts">
-            <Posts userPosts={userPosts}/>
+            <Posts userPosts={userPosts}
+                   setUserPosts={setUserPosts}
+                   isLoggedin={isLoggedin}
+                   setIsLoggedin={setIsLoggedin}/>
           </Route>
         </Switch>
       

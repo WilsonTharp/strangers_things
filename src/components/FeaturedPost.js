@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { FaTimesCircle } from 'react-icons/fa'
 import { TextField } from "@material-ui/core";
 
-const FeaturedPost = ({featuredPost, setFeaturedPost}) => {
+const FeaturedPost = ({featuredPost, setFeaturedPost, isLoggedin}) => {
     return (
         <div className="featured-post">
         <div className="post">
@@ -14,6 +14,22 @@ const FeaturedPost = ({featuredPost, setFeaturedPost}) => {
             <h4><b>Price: </b>{featuredPost.price}</h4>
             <h3><b>Seller: </b>{featuredPost.author.username}</h3>
             <h4><b>Location: </b>{featuredPost.location}</h4>
+            {
+                isLoggedin ?
+                <>
+                <h3>Message User about this Post</h3>
+                <TextField id="standard-basic"
+                        label="Message"
+                        style={{width: "31.25rem"}} 
+                        multiline/>
+                <Button variant='outlined'
+                    color='primary'
+                    style={{marginTop: '1rem', width: '18.75rem'}}>
+                    Send Message</Button>
+                </>
+                :
+                null
+            }
             <div className="post-messages">
                 {
                 featuredPost.messages.map((message, i) => {
@@ -23,15 +39,6 @@ const FeaturedPost = ({featuredPost, setFeaturedPost}) => {
                         </div>
                     )
                 })}
-            <h3>Message User about this Post</h3>
-            <TextField id="standard-basic"
-                        label="Message"
-                        style={{width: "31.25rem"}} 
-                        multiline/>
-            <Button variant='outlined'
-                    color='primary'
-                    style={{marginTop: '1rem', width: '18.75rem'}}>
-                    Send Message</Button>
             </div>
         </div>
     </div>
