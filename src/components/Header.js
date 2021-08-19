@@ -1,7 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+
 
 import {
   BrowserRouter as Router,
@@ -27,6 +28,20 @@ const Header = ({isLoggedin, setIsLoggedin}) => {
         },
       })(Button);
 
+    const history = useHistory()
+
+    function logOut () {
+      setIsLoggedin(false)
+      localStorage.removeItem("message");
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("success");
+      history.push('/login');
+      console.log(localStorage);
+
+
+    }
+
     return (
         <header>
            <h1>Stranger Things</h1>
@@ -35,11 +50,14 @@ const Header = ({isLoggedin, setIsLoggedin}) => {
               <StyledButton component={Link} to="/posts">Posts</StyledButton>
               {
                 isLoggedin ?
+                <>
                 <StyledButton component={Link} to="/profile">Profile</StyledButton> 
+                <StyledButton onClick={logOut}>Log Out</StyledButton>
+                </>
                 :
-                null
+                <StyledButton component={Link} to="/login">Log in</StyledButton>
               }
-              <StyledButton component={Link} to="/login">Log in</StyledButton>
+              
             </div> 
         </header>
     )

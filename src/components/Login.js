@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import { TextField } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { useHistory , Link } from "react-router-dom";
 
-const Login = ({logInRequest}) => {
+const Login = ({ logInRequest, isLoggedin, setIsLoggedin }) => {
     
     const [user, setUser] = useState({username: '', password: ''});
 
@@ -14,18 +14,19 @@ const Login = ({logInRequest}) => {
         console.log(user);
     }
 
+    const history = useHistory() 
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) { 
+        
         event.preventDefault();
-        logInRequest(user); 
-        // if (result.success===true){ //how to use authentication data here to route to different pages depending on result?
-        //     history.push('/home')
-        // } else {
-        //     return (
-        //         <h1>Log In attempt failed, please try again</h1>
-        //     )
-        // }
-
+        await logInRequest(user);
+        if (localStorage.getItem('token')) {
+            setIsLoggedin(true);
+            localStorage.setItem('username', user.username);
+            history.push('/');
+        } else {
+            history.push('/message') 
+        }
     }
     
     return (
