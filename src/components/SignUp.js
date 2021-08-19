@@ -1,9 +1,10 @@
+import { TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 
-const SignUp = ({createNewUser}) => {
-
+const SignUp = ({createNewUser, setIsLoggedin}) => {
+    console.log(createNewUser)
     const [newUser, setNewUser] = useState({username: '', password: ''});
     console.log(newUser);
 
@@ -15,20 +16,24 @@ const SignUp = ({createNewUser}) => {
         console.log(newUser);
     }
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        createNewUser(newUser);
-        // if(results.success==-true){ // HOW TO USE DATA FROM SIGN IN?
-        //     history.push('/home')
-        //     } else {
-        // return (
-        //     <div>
-        //        <h3> {result.data.message} </h3> //HOW TO SHOW THIS AFTER SUBMIT?
-        //     </div>
-        // )
-        //     }
+    const history = useHistory()
 
+    async function handleSubmit(event) {
+        event.preventDefault();
+        await createNewUser(newUser);
+        let storedToken = localStorage.getItem('token');
+        console.log(storedToken);
+        if (storedToken) {
+            
+            setIsLoggedin(true);
+            localStorage.setItem('username', newUser.username);
+            history.push('/');
+        } else {
+            history.push('/message') 
+        }
+        
     }
+
     
     return (
         <div id="signUp">

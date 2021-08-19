@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import { TextField } from "@material-ui/core";
+import { useHistory , Link } from "react-router-dom";
 
-import { Link } from "react-router-dom";
-
-const Login = ({logInRequest}) => {
+const Login = ({ logInRequest, isLoggedin, setIsLoggedin }) => {
     
     const [user, setUser] = useState({username: '', password: ''});
 
@@ -15,18 +14,19 @@ const Login = ({logInRequest}) => {
         console.log(user);
     }
 
+    const history = useHistory() 
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) { 
+        
         event.preventDefault();
-        logInRequest(user); 
-        // if (localStorage.getItem("success")===true){ 
-        //     history.push('/home')
-        // } else {
-        //     return (
-        //         <h1>Log In attempt failed, please try again</h1>
-        //     )
-        // }
-
+        await logInRequest(user);
+        if (localStorage.getItem('token')) {
+            setIsLoggedin(true);
+            localStorage.setItem('username', user.username);
+            history.push('/');
+        } else {
+            history.push('/message') 
+        }
     }
     
     return (
@@ -38,7 +38,7 @@ const Login = ({logInRequest}) => {
                            onChange= {handleInput}
                            label="Username"
                            name="username"
-                           value={user.username}
+                        //    value={user.username}
                            variant="outlined"
                            type="text"
                            style= {{width: 350, marginBottom: 20, marginTop: 10}} />
@@ -48,7 +48,7 @@ const Login = ({logInRequest}) => {
                            onChange= {handleInput} 
                            label="Password"
                            name="password"
-                           value={user.password}
+                        //    value={user.password}
                            variant="outlined"
                            type= "password"
                            style= {{width: 350, marginBottom: 20}} />
