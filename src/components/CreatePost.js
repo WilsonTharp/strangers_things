@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import { useHistory } from 'react-router';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { FaTimesCircle } from 'react-icons/fa'
 import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
-import { postUserPost, fetchUserPosts } from '../API';
+import { postUserPost } from '../API';
 
-const CreatePost = ({createPost, setCreatePost, setUserPosts}) => {
+const CreatePost = ({setCreatePost}) => {
 
     const [post, setPost] = useState({title: '', description: '', price: '', location: '', willDeliver: false});
 
@@ -17,46 +16,47 @@ const CreatePost = ({createPost, setCreatePost, setUserPosts}) => {
         console.log(post);
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        postUserPost(post);
-        setCreatePost(null);
+        await postUserPost(post);
+        setCreatePost(false);
     }
 
     return (
         <div className="create-post">
             <div>
                 <FaTimesCircle style={{color: 'red', fontSize: '1.5rem', marginLeft:'37rem'}}
-                               onClick={() => setCreatePost(null)}/>
+                               onClick={() => setCreatePost(false)}/>
                 <div>
                 <TextField style={{marginTop: '1rem', marginLeft: '3rem', width: '33rem'}}
-                       name='title'
-                       onChange= {handleInput}
-                       variant='outlined'
-                       label='Title'
-                       color='primary'
-                       required/>
+                           name='title'
+                           onChange= {handleInput}
+                           variant='outlined'
+                           label='Title'
+                           color='primary'
+                           required
+                           />
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
-                       name='description'
-                       onChange= {handleInput}
-                       variant='outlined'
-                       label='Description'
-                       color='primary'
-                       multiline
-                       required/>
+                           name='description'
+                           onChange= {handleInput}
+                           variant='outlined'
+                           label='Description'
+                           color='primary'
+                           multiline
+                           required/>
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
-                       name='price'
-                       onChange= {handleInput}
-                       variant='outlined'
-                       label='Price $'
-                       color='primary'
-                       required/>
+                           name='price'
+                           onChange= {handleInput}
+                           variant='outlined'
+                           label='Price $'
+                           color='primary'
+                           required/>
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
-                       name='location'
-                       onChange= {handleInput}
-                       variant='outlined'
-                       label='Location'
-                       color='primary'/>
+                           name='location'
+                           onChange= {handleInput}
+                           variant='outlined'
+                           label='Location'
+                           color='primary'/>
                 <div>
                     <FormControlLabel control={<Checkbox color='primary'
                                                          name='willDeliver'
@@ -70,7 +70,7 @@ const CreatePost = ({createPost, setCreatePost, setUserPosts}) => {
                         variant='outlined'
                         color='primary'>
                         Create Post</Button>
-            </div>
+                </div>
             </div>
         </div>
     )

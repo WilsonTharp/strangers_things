@@ -17,39 +17,39 @@ const Header = ({isLoggedin, setIsLoggedin}) => {
     setIsLoggedin(false);
   }
 
-    const StyledButton = withStyles({
-        root: {
-          background: '#990033',
-          borderRadius: 3,
-          border: 0,
-          color: 'white',
-          height: 65,
-          padding: '0 30px',
-          boxShadow: 'black',
-          fontSize: '1rem',
-        },
-        label: {
-          textTransform: 'capitalize',
-        },
-      })(Button);
+  const StyledButton = withStyles({
+    root: {
+      background: '#990033',
+      borderRadius: 3,
+      border: 0,
+      color: 'white',
+      height: 65,
+      padding: '0 30px',
+      boxShadow: 'black',
+      fontSize: '1rem',
+    },
+    label: {
+      textTransform: 'capitalize',
+    },
+  })(Button);
 
-    return (
-        <header>
-           <h1>Stranger Things</h1>
-           <div id="nav-bar">
-              <StyledButton component={Link} to="/">Home</StyledButton>
-              <StyledButton component={Link} to="/posts">Posts</StyledButton>
-              {
-                isLoggedin ?
-                <>
-                <StyledButton component={Link} to="/profile">Profile</StyledButton> 
-                <StyledButton component={Link} to="/" onClick={logOut}>Log out</StyledButton>
-                </>
-                :
-                <StyledButton component={Link} to="/login">Log in</StyledButton>
-              }
-            </div> 
-        </header>
+  return (
+    <header>
+     <h1>Stranger Things</h1>
+      <div id="nav-bar">
+        <StyledButton component={Link} to="/">Home</StyledButton>
+        <StyledButton component={Link} to="/posts">Posts</StyledButton>
+        {
+          isLoggedin ?
+            <>
+            <StyledButton component={Link} to="/profile">Profile</StyledButton> 
+            <StyledButton component={Link} to="/" onClick={logOut}>Log out</StyledButton>
+            </>
+          :
+            <StyledButton component={Link} to="/login">Log in</StyledButton>
+        }
+      </div> 
+    </header>
     )
 }
 

@@ -44,7 +44,6 @@ const Login = ({logInRequest, setIsLoggedin}) => {
                            onChange= {handleInput}
                            label="Username"
                            name="username"
-                        //    value={user.username}
                            variant="outlined"
                            type="text"
                            style= {{width: 350, marginBottom: 20, marginTop: 10}} />
@@ -54,7 +53,6 @@ const Login = ({logInRequest, setIsLoggedin}) => {
                            onChange= {handleInput} 
                            label="Password"
                            name="password"
-                        //    value={user.password}
                            variant="outlined"
                            type= "password"
                            style= {{width: 350, marginBottom: 20}} />

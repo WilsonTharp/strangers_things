@@ -6,22 +6,32 @@ import {
     FeaturedPost,
     UserPost
 } from './index.js'
+import { fetchUserPosts } from "../API/index.js";
 
 
-const Posts = ({userPosts, setUserPosts, isLoggedin, setIsLogggedin}) => {
+
+const Posts = ({isLoggedin, userId}) => {
+    const [userPosts, setUserPosts] = useState([]);
     const [featuredPost, setFeaturedPost] = useState(null);
-    const [createPost, setCreatePost] = useState(null);
+    const [createPost, setCreatePost] = useState(false);
 
-    console.log(userPosts)
+    useEffect(() => {
+        fetchUserPosts(setUserPosts)
+    },[featuredPost, createPost])
+
+    function searchBar(event) {
+        
+    }
     return (
         <div id="posts-page">
             <div className="posts-header">
                 <h1>Posts</h1>
                 <TextField variant="filled"
                            label="Search"
+                           onChange={searchBar}
                            style={{marginTop: '.6rem', marginLeft: '2rem', marginRight: '2rem', width: '20rem'}}/>
                 {
-                    isLoggedin ? 
+                    isLoggedin &&
                     <Button variant="outlined"
                         color="primary"
                         style={{height: '3rem', marginTop: '.8rem'}}
@@ -30,19 +40,11 @@ const Posts = ({userPosts, setUserPosts, isLoggedin, setIsLogggedin}) => {
                             setCreatePost(true);
                         }}>
                         Create a Post</Button>
-                        :
-                        ''
                 }
             </div>
             {
-                createPost ? 
-                <CreatePost createPost={createPost}
-                            setCreatePost={setCreatePost}
-                            userPosts={userPosts}
-                            setUserPosts={setUserPosts}/>
-                :
-                <>
-                </>
+                createPost &&
+                <CreatePost setCreatePost={setCreatePost}/>
             }
             <div className="post-list">
             {
@@ -53,19 +55,19 @@ const Posts = ({userPosts, setUserPosts, isLoggedin, setIsLogggedin}) => {
                           price={post.price}
                           username={post.author.username}
                           locaion={post.location}
-                          featuredPost={featuredPost}
                           setFeaturedPost={setFeaturedPost}
                           key={i}
                           isAuthor={post.isAuthor}
                           postId={post._id}
                           setUserPosts={setUserPosts}
-                          userPosts={userPosts} />
+                        />
             )
              }   
             </div>
             {
                 !featuredPost ?
-                <></> 
+                <>
+                </>
                 :
                 <FeaturedPost featuredPost={featuredPost}
                               setFeaturedPost={setFeaturedPost}
@@ -75,4 +77,4 @@ const Posts = ({userPosts, setUserPosts, isLoggedin, setIsLogggedin}) => {
     )
 }
 
-export default Posts
+export default Posts;

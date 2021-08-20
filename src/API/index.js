@@ -1,4 +1,5 @@
 export const BASE_URL = 'https://strangers-things.herokuapp.com/api/2105-OKU-RM-WEB-PT/'
+const token = localStorage.getItem('token');
 
 export async function logInRequest(user){
     try {
@@ -72,20 +73,52 @@ export async function postUserPost(post){
     }
 }
 
-export async function deleteUserPost(postId) {
-    const token = localStorage.getItem('token');
-    try {
-        fetch(`${BASE_URL}posts/${postId}`, {
-  method: "DELETE",
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  }
+export function deleteUserPost(postId) {
+    fetch(`${BASE_URL}posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     }).then(response => response.json())
-    .then(result => {
-    console.log(result);
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+export function fetchUserPosts(setUserPosts) {
+    fetch(`${BASE_URL}posts`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    }) .then(response => response.json())
+        .then(result => {
+            setUserPosts(result.data.posts)
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+export function postUserMessage(id, message) {
+    fetch(`${BASE_URL}posts/${id}/messages`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+        message: {
+        content: `${message.content}`
+        }
+        })
+    }).then(response => response.json())
+        .then(result => {
+        console.log(result);
     })
-    } catch(error) {
-        console.error(error);
-    }
+        .catch(console.error);
 }
