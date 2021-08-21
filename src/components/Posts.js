@@ -16,18 +16,17 @@ import { fetchUserPosts, deleteUserPost } from "../API/index.js";
 
 
 
-const Posts = ({isLoggedin}) => {
-    const [userPosts, setUserPosts] = useState([]);
+const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
     const [featuredPost, setFeaturedPost] = useState(null);
     const [createPost, setCreatePost] = useState(false);
     const [search, setSearch] = useState('')
 
     const filteredPosts = search.length === 0 ?
                           userPosts :
-                          userPosts.filter(post => post.description.toLowerCase().includes(search) || 
-                          post.title.toLowerCase().includes(search) ||
-                          post.author.username.toLowerCase().includes(search) || 
-                          post.location.toLowerCase().includes(search) ||
+                          userPosts.filter(post => post.description.toLowerCase().includes(search.toLowerCase()) || 
+                          post.title.toLowerCase().includes(search.toLowerCase()) ||
+                          post.author.username.toLowerCase().includes(search.toLowerCase()) || 
+                          post.location.toLowerCase().includes(search.toLowerCase()) ||
                           post.price.includes(search));
 
     useEffect(() => {
