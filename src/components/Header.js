@@ -1,13 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { NavLink } from 'react-router-dom';
 
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
+  Link
 } from 'react-router-dom';
 
 const Header = ({isLoggedin, setIsLoggedin}) => {

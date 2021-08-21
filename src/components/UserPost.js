@@ -1,5 +1,8 @@
 import React from 'react';
 import { Button, Fade } from '@material-ui/core';
+import {
+    Link
+  } from 'react-router-dom';
 
 const UserPost = ({post, title, description, price, username, location, setFeaturedPost, isAuthor, postId, deletePost}) => {
 

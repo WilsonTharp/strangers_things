@@ -7,6 +7,11 @@ import {
     UserPost,
     Search
 } from './index.js'
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch
+  } from 'react-router-dom';
 import { fetchUserPosts, deleteUserPost } from "../API/index.js";
 
 
@@ -22,7 +27,8 @@ const Posts = ({isLoggedin}) => {
                           userPosts.filter(post => post.description.toLowerCase().includes(search) || 
                           post.title.toLowerCase().includes(search) ||
                           post.author.username.toLowerCase().includes(search) || 
-                          post.location.toLowerCase().includes(search));
+                          post.location.toLowerCase().includes(search) ||
+                          post.price.includes(search));
 
     useEffect(() => {
         fetchUserPosts(setUserPosts)
@@ -58,6 +64,7 @@ const Posts = ({isLoggedin}) => {
                 createPost &&
                 <CreatePost setCreatePost={setCreatePost}/>
             }
+            <hr></hr>
             <div className="post-list">
             {
             filteredPosts.map((post, i) => 

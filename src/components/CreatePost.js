@@ -8,12 +8,10 @@ const CreatePost = ({setCreatePost}) => {
 
     const [post, setPost] = useState({title: '', description: '', price: '', location: '', willDeliver: false});
 
-    function handleInput(event) {
-        const postKey = event.target.attributes['name'].value;
+    function handleChange(event, postKey) {
         const newState = {...post};
         {postKey === 'willDeliver' ? newState[postKey] = event.target.checked ? true : false : newState[postKey] = event.target.value};
         setPost(newState);
-        console.log(post);
     }
 
     async function handleSubmit(event) {
@@ -24,13 +22,13 @@ const CreatePost = ({setCreatePost}) => {
 
     return (
         <div className="create-post">
-            <div>
+            <form>
                 <FaTimesCircle style={{color: 'red', fontSize: '1.5rem', marginLeft:'37rem'}}
                                onClick={() => setCreatePost(false)}/>
                 <div>
                 <TextField style={{marginTop: '1rem', marginLeft: '3rem', width: '33rem'}}
                            name='title'
-                           onChange= {handleInput}
+                           onChange= {(e) => handleChange(e, 'title')}
                            variant='outlined'
                            label='Title'
                            color='primary'
@@ -38,7 +36,7 @@ const CreatePost = ({setCreatePost}) => {
                            />
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
                            name='description'
-                           onChange= {handleInput}
+                           onChange= {(e) => handleChange(e, 'description')}
                            variant='outlined'
                            label='Description'
                            color='primary'
@@ -46,21 +44,21 @@ const CreatePost = ({setCreatePost}) => {
                            required/>
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
                            name='price'
-                           onChange= {handleInput}
+                           onChange= {(e) => handleChange(e, 'price')}
                            variant='outlined'
                            label='Price $'
                            color='primary'
                            required/>
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
                            name='location'
-                           onChange= {handleInput}
+                           onChange= {(e) => handleChange(e, 'location')}
                            variant='outlined'
                            label='Location'
                            color='primary'/>
                 <div>
                     <FormControlLabel control={<Checkbox color='primary'
                                                          name='willDeliver'
-                                                         onChange={handleInput}/>}
+                                                         onChange={(e) => handleChange(e, 'willDeliver')}/>}
                                       label='Willing to Deliver?'
                                       style={{marginLeft: '2rem', marginTop: '1rem'}}>
                     </FormControlLabel>
@@ -71,7 +69,7 @@ const CreatePost = ({setCreatePost}) => {
                         color='primary'>
                         Create Post</Button>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }

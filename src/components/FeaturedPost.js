@@ -11,9 +11,7 @@ const FeaturedPost = ({featuredPost, setFeaturedPost, isLoggedin}) => {
     const postId = featuredPost._id;
     const isAuthor = featuredPost.isAuthor;
 
-    function handleInput(event) {
-        event.preventDefault();
-        const messageKey = event.target.attributes['name'].value;
+    function handleChange(event, messageKey) {
         const newState = {...messageContent};
         newState[messageKey] = event.target.value;
         setMessageContent(newState);
@@ -35,6 +33,7 @@ const FeaturedPost = ({featuredPost, setFeaturedPost, isLoggedin}) => {
                 <h4><b>Price: </b>{featuredPost.price}</h4>
                 <h3><b>Seller: </b>{featuredPost.author.username}</h3>
                 <h4><b>Location: </b>{featuredPost.location}</h4>
+                <h4><b>Willing to deliver: </b>{featuredPost.willDeliver ? `Yes` : `No`}</h4>
                 {
                     isLoggedin ?
             
@@ -50,7 +49,7 @@ const FeaturedPost = ({featuredPost, setFeaturedPost, isLoggedin}) => {
                                            label="Message"
                                            style={{width: "31.25rem"}} 
                                            multiline
-                                           onChange={handleInput}
+                                           onChange={(e) => handleChange(e, 'content')}
                                 />
                                 <Button variant='outlined'
                                         color='primary'
