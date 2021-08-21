@@ -16,8 +16,7 @@ import { fetchUserPosts, deleteUserPost } from "../API/index.js";
 
 
 
-const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
-    const [featuredPost, setFeaturedPost] = useState(null);
+const Posts = ({isLoggedin, userPosts, setUserPosts, featuredPost, setFeaturedPost}) => {
     const [createPost, setCreatePost] = useState(false);
     const [search, setSearch] = useState('')
 

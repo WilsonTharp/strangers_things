@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import FeaturedPost from "./FeaturedPost"
 
-const Profile = ({getMessages}) => {
+const Profile = ({getMessages, userPosts, setUserPosts, featuredPost, setFeaturedPost, isLoggedin}) => {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
@@ -12,6 +13,12 @@ const Profile = ({getMessages}) => {
     const messagesFromMe = [];
 
     const messagesToMe = [];
+
+    // function linkToPost(event, postId) {
+    //     userPosts.filter((posts, i)=>{
+    //         const post = 
+    //     })
+    // }
     
     messages.map((message)=>{
         if (message.fromUser.username === `${localStorage.getItem("username")}`) {
@@ -33,7 +40,7 @@ const Profile = ({getMessages}) => {
                         <div className="message" key={i}>
                             <h2>From: {messages.fromUser.username}</h2>
                             <p>{messages.content}</p>
-                            <Link><h4>VIEW MY POST: {messages.post.title}</h4></Link>
+                            <Link onClick={(event)=>linkToPost(event, messages.post._id)}><h4>VIEW MY POST: {messages.post.title}</h4></Link>
                         </div>
                     )
                     })
@@ -53,6 +60,16 @@ const Profile = ({getMessages}) => {
                     })
                 }
             </div>
+            {
+                !featuredPost ?
+                <>
+                </>
+                :
+                <FeaturedPost featuredPost={featuredPost}
+                              setFeaturedPost={setFeaturedPost}
+                              isLoggedin={isLoggedin}/>
+            } 
+
          </div>    
     )
 }

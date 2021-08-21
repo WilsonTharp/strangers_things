@@ -30,7 +30,9 @@ import {
   const App = () => {
 
     const [userPosts, setUserPosts] = useState([]);
-    const [isLoggedin, setIsLoggedin] = useState(null);   
+    const [isLoggedin, setIsLoggedin] = useState(null); 
+
+    const [featuredPost, setFeaturedPost] = useState(null);  
 
     useEffect(() => {
       {localStorage.getItem('token') ? setIsLoggedin(true) : setIsLoggedin(false)};
@@ -56,7 +58,10 @@ import {
           <Route path="/profile">
             <Profile getMessages={getMessages}
                       userPosts={userPosts}
-                      setUserPosts={setUserPosts}/>
+                      setUserPosts={setUserPosts}
+                      featuredPost={featuredPost}
+                      setFeaturedPost={setFeaturedPost}
+                      isLoggedin={isLoggedin}/>
           </Route>
           <Route exact path="/">
             <Home isLoggedin={isLoggedin}
@@ -66,7 +71,9 @@ import {
             <Posts isLoggedin={isLoggedin}
                    userPosts={userPosts}
                    setUserPosts={setUserPosts}
-                   userPosts={userPosts}/>
+                   userPosts={userPosts}
+                   featuredPost={featuredPost}
+                    setFeaturedPost={setFeaturedPost}/>
           </Route>
           <Route path="/message">
             <Message />
