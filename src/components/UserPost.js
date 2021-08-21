@@ -1,14 +1,8 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
-import { deleteUserPost, fetchUserPosts } from '../API';
+import { Button, Fade } from '@material-ui/core';
 
-const UserPost = ({post, title, description, price, username, location, setFeaturedPost, isAuthor, postId, setUserPosts}) => {
+const UserPost = ({post, title, description, price, username, location, setFeaturedPost, isAuthor, postId, deletePost}) => {
 
-    async function deletePost(e, id) {
-        e.preventDefault();
-        await deleteUserPost(id);
-        fetchUserPosts(setUserPosts);
-    }
     return (
         <div className="user-post">
             <h2>{title}</h2>

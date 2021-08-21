@@ -4,32 +4,44 @@ import { TextField } from "@material-ui/core";
 import {
     CreatePost,
     FeaturedPost,
-    UserPost
+    UserPost,
+    Search
 } from './index.js'
-import { fetchUserPosts } from "../API/index.js";
+import { fetchUserPosts, deleteUserPost } from "../API/index.js";
 
 
 
-const Posts = ({isLoggedin, userId}) => {
+const Posts = ({isLoggedin}) => {
     const [userPosts, setUserPosts] = useState([]);
     const [featuredPost, setFeaturedPost] = useState(null);
     const [createPost, setCreatePost] = useState(false);
+    const [search, setSearch] = useState('')
+
+    const filteredPosts = search.length === 0 ?
+                          userPosts :
+                          userPosts.filter(post => post.description.toLowerCase().includes(search) || 
+                          post.title.toLowerCase().includes(search) ||
+                          post.author.username.toLowerCase().includes(search) || 
+                          post.location.toLowerCase().includes(search));
 
     useEffect(() => {
         fetchUserPosts(setUserPosts)
-    },[featuredPost, createPost])
+    },[featuredPost, createPost, deletePost])
 
-    function searchBar(event) {
-        
+    
+    async function deletePost(e, id) {
+        e.preventDefault();
+        await deleteUserPost(id);
+        fetchUserPosts(setUserPosts);
     }
     return (
         <div id="posts-page">
             <div className="posts-header">
                 <h1>Posts</h1>
-                <TextField variant="filled"
-                           label="Search"
-                           onChange={searchBar}
-                           style={{marginTop: '.6rem', marginLeft: '2rem', marginRight: '2rem', width: '20rem'}}/>
+                <Search userPosts={userPosts}
+                        setUserPosts={setUserPosts}
+                        search={search}
+                        setSearch={setSearch}/>
                 {
                     isLoggedin &&
                     <Button variant="outlined"
@@ -48,7 +60,7 @@ const Posts = ({isLoggedin, userId}) => {
             }
             <div className="post-list">
             {
-            userPosts.map((post, i) => 
+            filteredPosts.map((post, i) => 
                 <UserPost post={post}
                           title={post.title}
                           description={post.description}
@@ -59,7 +71,7 @@ const Posts = ({isLoggedin, userId}) => {
                           key={i}
                           isAuthor={post.isAuthor}
                           postId={post._id}
-                          setUserPosts={setUserPosts}
+                          deletePost={deletePost}
                         />
             )
              }   

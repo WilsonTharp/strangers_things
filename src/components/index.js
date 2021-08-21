@@ -7,3 +7,4 @@ export {default as Posts} from './Posts';
 export {default as CreatePost} from './CreatePost';
 export {default as FeaturedPost} from './FeaturedPost';
 export {default as UserPost} from './UserPost';
+export {default as Search} from './Search';
