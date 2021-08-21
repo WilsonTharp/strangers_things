@@ -30,34 +30,19 @@ import {
 
     const [userPosts, setUserPosts] = useState([]);
     const [isLoggedin, setIsLoggedin] = useState(null);
+  
 
     useEffect(() => {
       {localStorage.getItem('token') ? setIsLoggedin(true) : setIsLoggedin(false)};
     }, []);
-
-    useEffect(() => {
-      try {
-        const token = localStorage.getItem('token');
-        fetch(`${BASE_URL}users/me`, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }, 
-        }) .then(response => response.json())
-           .then(result => {
-               setCurrentUser(result.data)
-           })
-    } catch (error) {
-        console.error(error);
-    }
-    }, [])
 
     return (
       <>
     
     <div className="app">
       
-        <Header isLoggedin={isLoggedin}/>
+        <Header isLoggedin={isLoggedin}
+                setIsLoggedin={setIsLoggedin}/>
         <Switch>
           <Route path="/login">
             <Login logInRequest={logInRequest}
