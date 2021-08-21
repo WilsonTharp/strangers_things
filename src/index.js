@@ -29,8 +29,7 @@ import {
   const App = () => {
 
     const [userPosts, setUserPosts] = useState([]);
-    const [isLoggedin, setIsLoggedin] = useState(null);
-  
+    const [isLoggedin, setIsLoggedin] = useState(null);   
 
     useEffect(() => {
       {localStorage.getItem('token') ? setIsLoggedin(true) : setIsLoggedin(false)};
@@ -62,7 +61,9 @@ import {
           </Route>
           <Route path="/posts">
             <Posts isLoggedin={isLoggedin}
-                   setIsLoggedin={setIsLoggedin}/>
+                   userPosts={userPosts}
+                   setUserPosts={setUserPosts}
+                   userPosts={userPosts}/>
           </Route>
           <Route path="/message">
             <Message />

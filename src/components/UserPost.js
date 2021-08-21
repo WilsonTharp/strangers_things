@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button, Fade } from '@material-ui/core';
+import FeaturedPost from './FeaturedPost';
 import {
+    Switch,
+    Route,
     Link
   } from 'react-router-dom';
 
@@ -15,12 +18,13 @@ const UserPost = ({post, title, description, price, username, location, setFeatu
             <h4><b>Location: </b>{location}</h4>
             <Button variant="outlined"
                     color="primary"
+                    component={Link}
+                    to={`/featuredpost/${postId}`}
                     style={{marginBottom:"1rem"}}
                     onClick={(event) => {
                         event.preventDefault();
                         setFeaturedPost(post);
-                    }}>Expand post</Button>
-            {
+                    }}>Expand post</Button>            {
                 isAuthor ?
                     <>
                         <Button variant='outlined'
