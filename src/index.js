@@ -19,6 +19,7 @@ import {
   } from './components';
 
   import {
+    BASE_URL,
     createNewUser,
     logInRequest,
     fetchUserPosts
@@ -29,19 +30,10 @@ import {
 
     const [userPosts, setUserPosts] = useState([]);
     const [isLoggedin, setIsLoggedin] = useState(null);
+  
 
     useEffect(() => {
       {localStorage.getItem('token') ? setIsLoggedin(true) : setIsLoggedin(false)};
-    }, []);
-    
-    useEffect(() => {
-      fetchUserPosts()
-        .then(userPosts => {
-         setUserPosts(userPosts.data.posts)
-       })
-      .catch(error => {
-        throw error
-      });
     }, []);
 
     return (
@@ -69,7 +61,8 @@ import {
                 setIsLoggedin={setIsLoggedin}/>
           </Route>
           <Route path="/posts">
-            <Posts userPosts={userPosts}/>
+            <Posts isLoggedin={isLoggedin}
+                   setIsLoggedin={setIsLoggedin}/>
           </Route>
           <Route path="/message">
             <Message />

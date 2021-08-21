@@ -5,29 +5,32 @@ import { NavLink, useHistory } from 'react-router-dom';
 
 
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
+  Link
 } from 'react-router-dom';
 
 const Header = ({isLoggedin, setIsLoggedin}) => {
-    const StyledButton = withStyles({
-        root: {
-          background: '#990033',
-          borderRadius: 3,
-          border: 0,
-          color: 'white',
-          height: 65,
-          padding: '0 30px',
-          boxShadow: 'black',
-          fontSize: '1rem',
-        },
-        label: {
-          textTransform: 'capitalize',
-        },
-      })(Button);
 
+  function logOut(event) {
+    localStorage.removeItem('token');
+    setIsLoggedin(false);
+  }
+
+  const StyledButton = withStyles({
+    root: {
+      background: '#990033',
+      borderRadius: 3,
+      border: 0,
+      color: 'white',
+      height: 65,
+      padding: '0 30px',
+      boxShadow: 'black',
+      fontSize: '1rem',
+    },
+    label: {
+      textTransform: 'capitalize',
+    },
+  })(Button);
+  
     const history = useHistory()
 
     function logOut () {

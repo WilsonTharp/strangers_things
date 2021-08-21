@@ -1,22 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from '@material-ui/core/Button';
 import { TextField } from "@material-ui/core";
-import FeaturedPost from './FeaturedPost';
-import CreatePost from './CreatePost';
+import {
+    CreatePost,
+    FeaturedPost,
+    UserPost,
+    Search
+} from './index.js'
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch
+  } from 'react-router-dom';
+import { fetchUserPosts, deleteUserPost } from "../API/index.js";
 
-const Posts = ({userPosts}) => {
+
+
+const Posts = ({isLoggedin}) => {
+    const [userPosts, setUserPosts] = useState([]);
     const [featuredPost, setFeaturedPost] = useState(null);
-    const [createPost, setCreatePost] = useState(null);
+    const [createPost, setCreatePost] = useState(false);
+    const [search, setSearch] = useState('')
 
-    console.log(userPosts);
+    const filteredPosts = search.length === 0 ?
+                          userPosts :
+                          userPosts.filter(post => post.description.toLowerCase().includes(search) || 
+                          post.title.toLowerCase().includes(search) ||
+                          post.author.username.toLowerCase().includes(search) || 
+                          post.location.toLowerCase().includes(search) ||
+                          post.price.includes(search));
+
+    useEffect(() => {
+        fetchUserPosts(setUserPosts)
+    },[featuredPost, createPost, deletePost])
+
+    
+    async function deletePost(e, id) {
+        e.preventDefault();
+        await deleteUserPost(id);
+        fetchUserPosts(setUserPosts);
+    }
     return (
         <div id="posts-page">
             <div className="posts-header">
                 <h1>Posts</h1>
-                <TextField variant="filled"
-                           label="Search"
-                           style={{marginTop: '.6rem', marginLeft: '2rem', marginRight: '2rem', width: '20rem'}}/>
-                <Button variant="outlined"
+                <Search userPosts={userPosts}
+                        setUserPosts={setUserPosts}
+                        search={search}
+                        setSearch={setSearch}/>
+                {
+                    isLoggedin &&
+                    <Button variant="outlined"
                         color="primary"
                         style={{height: '3rem', marginTop: '.8rem'}}
                         onClick={(event) => {
@@ -24,47 +58,42 @@ const Posts = ({userPosts}) => {
                             setCreatePost(true);
                         }}>
                         Create a Post</Button>
+                }
             </div>
             {
-                createPost ? 
-                <CreatePost createPost={createPost}
-                            setCreatePost={setCreatePost}/>
-                :
-                <>
-                </>
+                createPost &&
+                <CreatePost setCreatePost={setCreatePost}/>
             }
+            <hr></hr>
             <div className="post-list">
             {
-            userPosts.map((post, i) => {
-                return (
-                    <div className="user-post" key={i}>
-                        <h2>{post.title}</h2>
-                        <p>{post.description}</p>
-                        <h4><b>Price: </b>{post.price}</h4>
-                        <h3><b>Seller: </b>{post.author.username}</h3>
-                        <h4><b>Location: </b>{post.location}</h4>
-                        <Button variant="outlined"
-                                color="primary"
-                                style={{marginBottom:"1rem"}}
-                                value={this}
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    setFeaturedPost(post);
-                                }}>Expand post</Button>
-                    </div>
-                )
-                })
+            filteredPosts.map((post, i) => 
+                <UserPost post={post}
+                          title={post.title}
+                          description={post.description}
+                          price={post.price}
+                          username={post.author.username}
+                          locaion={post.location}
+                          setFeaturedPost={setFeaturedPost}
+                          key={i}
+                          isAuthor={post.isAuthor}
+                          postId={post._id}
+                          deletePost={deletePost}
+                        />
+            )
              }   
             </div>
             {
                 !featuredPost ?
-                <></> 
+                <>
+                </>
                 :
                 <FeaturedPost featuredPost={featuredPost}
-                              setFeaturedPost={setFeaturedPost}/>
+                              setFeaturedPost={setFeaturedPost}
+                              isLoggedin={isLoggedin}/>
             }       
         </div>
     )
 }
 
-export default Posts
+export default Posts;

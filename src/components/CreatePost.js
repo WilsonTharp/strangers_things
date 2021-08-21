@@ -1,47 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import { FaTimesCircle } from 'react-icons/fa'
 import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
+import { postUserPost } from '../API';
 
-const CreatePost = ({createPost, setCreatePost}) => {
+const CreatePost = ({setCreatePost}) => {
+
+    const [post, setPost] = useState({title: '', description: '', price: '', location: '', willDeliver: false});
+
+    function handleChange(event, postKey) {
+        const newState = {...post};
+        {postKey === 'willDeliver' ? newState[postKey] = event.target.checked ? true : false : newState[postKey] = event.target.value};
+        setPost(newState);
+    }
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        await postUserPost(post);
+        setCreatePost(false);
+    }
+
     return (
         <div className="create-post">
-            <div>
+            <form>
                 <FaTimesCircle style={{color: 'red', fontSize: '1.5rem', marginLeft:'37rem'}}
-                               onClick={() => setCreatePost(null)}/>
+                               onClick={() => setCreatePost(false)}/>
                 <div>
                 <TextField style={{marginTop: '1rem', marginLeft: '3rem', width: '33rem'}}
-                       variant='outlined'
-                       label='Title'
-                       color='primary'
-                       required/>
+                           name='title'
+                           onChange= {(e) => handleChange(e, 'title')}
+                           variant='outlined'
+                           label='Title'
+                           color='primary'
+                           required
+                           />
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
-                       variant='outlined'
-                       label='Description'
-                       color='primary'
-                       multiline
-                       required/>
+                           name='description'
+                           onChange= {(e) => handleChange(e, 'description')}
+                           variant='outlined'
+                           label='Description'
+                           color='primary'
+                           multiline
+                           required/>
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
-                       variant='outlined'
-                       label='Price'
-                       color='primary'
-                       required/>
+                           name='price'
+                           onChange= {(e) => handleChange(e, 'price')}
+                           variant='outlined'
+                           label='Price $'
+                           color='primary'
+                           required/>
                 <TextField style={{marginTop: '2rem', marginLeft: '3rem', width: '33rem'}}
-                       variant='outlined'
-                       label='Location'
-                       color='primary'/>
+                           name='location'
+                           onChange= {(e) => handleChange(e, 'location')}
+                           variant='outlined'
+                           label='Location'
+                           color='primary'/>
                 <div>
-                    <FormControlLabel control={<Checkbox color='primary'/>}
+                    <FormControlLabel control={<Checkbox color='primary'
+                                                         name='willDeliver'
+                                                         onChange={(e) => handleChange(e, 'willDeliver')}/>}
                                       label='Willing to Deliver?'
                                       style={{marginLeft: '2rem', marginTop: '1rem'}}>
                     </FormControlLabel>
                 </div>
                 <Button style={{marginTop:'1rem', marginLeft: '3rem', width: '33rem'}}
+                        onClick={handleSubmit}
                         variant='outlined'
                         color='primary'>
                         Create Post</Button>
-            </div>
-            </div>
+                </div>
+            </form>
         </div>
     )
 }
