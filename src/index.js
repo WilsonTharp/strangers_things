@@ -14,20 +14,22 @@ import {
     Login,
     SignUp,
     Posts,
+    Message,
     Profile
   } from './components';
 
   import {
     BASE_URL,
     createNewUser,
-    logInRequest
+    logInRequest,
+    fetchUserPosts
   } from './API/index.js'
 
 
   const App = () => {
 
+    const [userPosts, setUserPosts] = useState([]);
     const [isLoggedin, setIsLoggedin] = useState(null);
-    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
       {localStorage.getItem('token') ? setIsLoggedin(true) : setIsLoggedin(false)};
@@ -59,11 +61,12 @@ import {
         <Switch>
           <Route path="/login">
             <Login logInRequest={logInRequest}
-                   isLoggedin={isLoggedin}
-                   setIsLoggedin={setIsLoggedin} />
+                    isLoggedin={isLoggedin}
+                    setIsLoggedin={setIsLoggedin} />
           </Route>
           <Route path="/signup">
-            <SignUp createNewUser={createNewUser} />
+            <SignUp createNewUser={createNewUser}
+                    setIsLoggedin={setIsLoggedin} />
           </Route>
           <Route path="/profile">
             <Profile />
@@ -75,6 +78,9 @@ import {
           <Route path="/posts">
             <Posts isLoggedin={isLoggedin}
                    setIsLoggedin={setIsLoggedin}/>
+          </Route>
+          <Route path="/message">
+            <Message />
           </Route>
         </Switch>
       

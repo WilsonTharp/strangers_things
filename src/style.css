@@ -164,4 +164,13 @@ hr {
     border-width: .1px;
     border-radius: 10px;
     border-color: black;
+    background-color: lightgrey;
+    box-shadow: 0 2px 8px black;
+}
+
+#message {
+    display: block;
+    align-items: center;
+    text-align: center;
+    margin: auto;
 }

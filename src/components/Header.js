@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import { NavLink, useHistory } from 'react-router-dom';
+
 
 import {
   Link
@@ -28,24 +30,39 @@ const Header = ({isLoggedin, setIsLoggedin}) => {
       textTransform: 'capitalize',
     },
   })(Button);
+  
+    const history = useHistory()
 
-  return (
-    <header>
-     <h1>Stranger Things</h1>
-      <div id="nav-bar">
-        <StyledButton component={Link} to="/">Home</StyledButton>
-        <StyledButton component={Link} to="/posts">Posts</StyledButton>
-        {
-          isLoggedin ?
-            <>
-            <StyledButton component={Link} to="/profile">Profile</StyledButton> 
-            <StyledButton component={Link} to="/" onClick={logOut}>Log out</StyledButton>
-            </>
-          :
-            <StyledButton component={Link} to="/login">Log in</StyledButton>
-        }
-      </div> 
-    </header>
+    function logOut () {
+      setIsLoggedin(false)
+      localStorage.removeItem("message");
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("success");
+      history.push('/login');
+      console.log(localStorage);
+
+
+    }
+
+    return (
+        <header>
+           <h1>Stranger Things</h1>
+           <div id="nav-bar">
+              <StyledButton component={Link} to="/">Home</StyledButton>
+              <StyledButton component={Link} to="/posts">Posts</StyledButton>
+              {
+                isLoggedin ?
+                <>
+                <StyledButton component={Link} to="/profile">Profile</StyledButton> 
+                <StyledButton onClick={logOut}>Log Out</StyledButton>
+                </>
+                :
+                <StyledButton component={Link} to="/login">Log in</StyledButton>
+              }
+              
+            </div> 
+        </header>
     )
 }
 
