@@ -22,7 +22,8 @@ import {
     BASE_URL,
     createNewUser,
     logInRequest,
-    fetchUserPosts
+    fetchUserPosts,
+    getMessages
   } from './API/index.js'
 
 
@@ -53,7 +54,9 @@ import {
                     setIsLoggedin={setIsLoggedin} />
           </Route>
           <Route path="/profile">
-            <Profile />
+            <Profile getMessages={getMessages}
+                      userPosts={userPosts}
+                      setUserPosts={setUserPosts}/>
           </Route>
           <Route exact path="/">
             <Home isLoggedin={isLoggedin}

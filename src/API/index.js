@@ -104,6 +104,7 @@ export function fetchUserPosts(setUserPosts) {
     }) .then(response => response.json())
         .then(result => {
             setUserPosts(result.data.posts)
+            console.log(setUserPosts)
         })
         .catch(error => {
             console.error(error);
@@ -127,4 +128,21 @@ export function postUserMessage(id, message) {
         console.log(result);
     })
         .catch(console.error);
+}
+
+export async function getMessages(setMessages) {
+    try{const response = await fetch(`${BASE_URL}users/me`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+        console.log(response)
+        const result = await response.json()
+        console.log(result)
+        setMessages(result.data.messages)
+    
+    } catch (error) {
+        console.error(error);
+    }
 }

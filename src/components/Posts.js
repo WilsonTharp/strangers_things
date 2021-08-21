@@ -21,6 +21,7 @@ const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
     const [createPost, setCreatePost] = useState(false);
     const [search, setSearch] = useState('')
 
+
     const filteredPosts = search.length === 0 ?
                           userPosts :
                           userPosts.filter(post => post.description.toLowerCase().includes(search.toLowerCase()) || 
@@ -29,10 +30,10 @@ const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
                           post.location.toLowerCase().includes(search.toLowerCase()) ||
                           post.price.includes(search));
 
-    useEffect(() => {
-        fetchUserPosts(setUserPosts)
-    },[featuredPost, createPost, deletePost])
-
+  
+                          useEffect(() => {
+                            fetchUserPosts(setUserPosts)
+                        },[featuredPost, createPost, deletePost])
     
     async function deletePost(e, id) {
         e.preventDefault();

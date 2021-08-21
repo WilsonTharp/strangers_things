@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const Profile = ({getMessages, userPosts}) => {
+const Profile = ({getMessages}) => {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
