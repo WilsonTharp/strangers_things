@@ -16,10 +16,10 @@ import { fetchUserPosts, deleteUserPost } from "../API/index.js";
 
 
 
-const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
-    const [featuredPost, setFeaturedPost] = useState(null);
+const Posts = ({isLoggedin, userPosts, setUserPosts, featuredPost, setFeaturedPost}) => {
     const [createPost, setCreatePost] = useState(false);
     const [search, setSearch] = useState('')
+
 
     const filteredPosts = search.length === 0 ?
                           userPosts :
@@ -29,10 +29,10 @@ const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
                           post.location.toLowerCase().includes(search.toLowerCase()) ||
                           post.price.includes(search));
 
-    useEffect(() => {
-        fetchUserPosts(setUserPosts)
-    },[featuredPost, createPost, deletePost])
-
+  
+                          useEffect(() => {
+                            fetchUserPosts(setUserPosts)
+                        },[featuredPost, createPost, deletePost])
     
     async function deletePost(e, id) {
         e.preventDefault();

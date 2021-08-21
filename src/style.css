@@ -174,3 +174,8 @@ hr {
     text-align: center;
     margin: auto;
 }
+
+#profile {
+    display: flex;
+    grid-row-start: 4;
+}
