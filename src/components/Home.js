@@ -11,7 +11,7 @@ const Home = ({isLoggedin, setIsLoggedin}) => {
     
     return (
         <div id="homePage">
-            <h1>Welcome to Stranger Things!</h1>
+            <h1 className="homepageH1">Welcome to Stranger Things!</h1>
             {
                 isLoggedin ? 
             <div>

@@ -176,6 +176,46 @@ hr {
 }
 
 #profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 50px 0 50px;
+}
+
+.profileMessageSection {
+    margin: 0 10px 0 10px;
+}
+
+.profileH1{
     display: flex;
-    grid-row-start: 4;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.profileCards{
+
+}
+
+.message{
+    background-color: whitesmoke;
+    border-radius: 0%;
+    box-shadow: none;
+    
+}
+
+.messagesH3 {
+    text-align: center;
+    justify-content: center;
+    
+}
+
+.homepageH1 {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.errorType{
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
 }

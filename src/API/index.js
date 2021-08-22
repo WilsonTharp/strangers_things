@@ -2,8 +2,10 @@
 export const BASE_URL = 'https://strangers-things.herokuapp.com/api/2105-OKU-RM-WEB-PT/'
 const token = localStorage.getItem('token');
 
+
 export async function logInRequest(user){
     try {
+        console.log(token)
         localStorage.setItem('username', user.username);
         const response = await fetch(`${BASE_URL}/users/login`, {
             method: 'POST',
@@ -19,9 +21,12 @@ export async function logInRequest(user){
         }).then(response => response.json())
         .then(result => {
             console.log(result)
-            localStorage.setItem('token', result.data.token);
-            
-            
+            if(result.data){
+                localStorage.setItem('token', result.data.token);
+                
+            }
+            localStorage.setItem('message', result.error.message);
+            console.log(result);
         })
     } catch (error) {
         (console.error);
@@ -45,7 +50,9 @@ export async function createNewUser(newUser) {
         const result = await response.json()
         if(result.data){
             localStorage.setItem('token', result.data.token);
+            
         }
+        localStorage.setItem('message', result.error.message);
         console.log(result);
     } catch(error) {
         console.error(error)
@@ -104,7 +111,6 @@ export function fetchUserPosts(setUserPosts) {
     }) .then(response => response.json())
         .then(result => {
             setUserPosts(result.data.posts)
-            console.log(setUserPosts)
         })
         .catch(error => {
             console.error(error);
