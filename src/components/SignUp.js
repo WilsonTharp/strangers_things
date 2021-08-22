@@ -36,24 +36,35 @@ const SignUp = ({createNewUser, setIsLoggedin}) => {
 
     
     return (
-        <div id="signUp">
+        
+        <div id="loginPage">
+            <h1>Sign In</h1>
             <form onSubmit={handleSubmit}>
-                <h1>Sign Up</h1>
-                <input type="text" 
-                    onChange={handleInput}
-                    name="username" 
-                    value={newUser.username}
-                    className= "loginInput" 
-                    placeholder="Username"></input>
-                <input type="password" 
-                    onChange={handleInput} 
-                    name="password"
-                    value={newUser.password}
-                    className= "loginInput" 
-                    placeholder="Password"></input>
-                <button className= "loginButton">Sign Up</button>
+            <div className="loginInputs">
+                <TextField id="outlined-basic-1"
+                           onChange= {handleInput}
+                           label="Username"
+                           name="username"
+                           value={newUser.username}
+                           variant="outlined"
+                           type="text"
+                           style= {{width: 350, marginBottom: 20, marginTop: 10}} />
+            </div>
+            <div className= "loginInputs">
+                <TextField id="outlined-basic=2"
+                           onChange= {handleInput} 
+                           label="Password"
+                           name="password"
+                           value={newUser.password}
+                           variant="outlined"
+                           type= "password"
+                           style= {{width: 350, marginBottom: 20}} />
+            </div>
+            <button className= "loginButton">Sign Up</button>
             </form>
         </div>
+
+    
     )
 }
 

@@ -10,10 +10,7 @@ import {
 
 const Header = ({isLoggedin, setIsLoggedin}) => {
 
-  function logOut(event) {
-    localStorage.removeItem('token');
-    setIsLoggedin(false);
-  }
+  
 
   const StyledButton = withStyles({
     root: {

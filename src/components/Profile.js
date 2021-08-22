@@ -30,10 +30,13 @@ const Profile = ({getMessages, userPosts, setUserPosts, featuredPost, setFeature
     console.log(messagesFromMe)
     console.log(messagesToMe)
     return(
+        <>
+        <h1 className="profileH1">Welcome {localStorage.getItem("username")}</h1>
+        <hr></hr>
         <div id = "profile">
-            <h1>Welcome {localStorage.getItem("username")}</h1>
-                <h3>Messages To Me</h3>
-            <div className="messagesToMe">
+            <div className="profileMessageSection">
+            <h3 className="messagesH3">Messages To Me </h3>  
+            <div className="profileCards">
                 {
                 messagesToMe.map((messages, i) => {
                     return (
@@ -46,19 +49,22 @@ const Profile = ({getMessages, userPosts, setUserPosts, featuredPost, setFeature
                     })
                 }
             </div>
-            <h3>Messages from Me</h3>
-            <div className="messagesFromMe">
-                {
-                messagesFromMe.map((messages, i) => {
-                    return (
-                        <div className="message" key={i}>
-                            <h2>From: {messages.fromUser.username}</h2>
-                            <p>{messages.content}</p>
-                            <Link><h4>VIEW MY POST: {messages.post.title}</h4></Link>
-                        </div>
-                    )
-                    })
-                }
+            </div>
+                <div className="profileMessageSection">
+                    <h3 className="messagesH3">Messages from Me</h3>
+                    <div className="profileCards">
+                        {
+                        messagesFromMe.map((messages, i) => {
+                            return (
+                                <div className="message" key={i}>
+                                    <h2>From: {messages.fromUser.username}</h2>
+                                    <p>{messages.content}</p>
+                                    <Link><h4>VIEW MY POST: {messages.post.title}</h4></Link>
+                                </div>
+                            )
+                            })
+                        }
+                </div>
             </div>
             {
                 !featuredPost ?
@@ -70,7 +76,8 @@ const Profile = ({getMessages, userPosts, setUserPosts, featuredPost, setFeature
                               isLoggedin={isLoggedin}/>
             } 
 
-         </div>    
+         </div> 
+         </>   
     )
 }
 
