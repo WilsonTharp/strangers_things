@@ -1,14 +1,9 @@
 import React from 'react';
 import { Button, Fade } from '@material-ui/core';
 import FeaturedPost from './FeaturedPost';
-import {
-    Switch,
-    Route,
-    Link
-  } from 'react-router-dom';
+import { fetchUserPosts } from '../API';
 
-const UserPost = ({post, title, description, price, username, location, setFeaturedPost, isAuthor, postId, deletePost}) => {
-
+const UserPost = ({post, title, description, price, username, location, setFeaturedPost, isAuthor, postId, deletePost, setUserPosts}) => {
     return (
         <div className="user-post">
             <h2>{title}</h2>
@@ -18,8 +13,6 @@ const UserPost = ({post, title, description, price, username, location, setFeatu
             <h4><b>Location: </b>{location}</h4>
             <Button variant="outlined"
                     color="primary"
-                    component={Link}
-                    to={`/featuredpost/${postId}`}
                     style={{marginBottom:"1rem"}}
                     onClick={(event) => {
                         event.preventDefault();
@@ -32,6 +25,7 @@ const UserPost = ({post, title, description, price, username, location, setFeatu
                                 style={{marginBottom:'1rem', marginLeft:'1rem'}}
                                 onClick={(e) => {
                                     deletePost(e, postId);
+                                    fetchUserPosts(setUserPosts)
                                }}
                         >Delete Post</Button> 
                     </>

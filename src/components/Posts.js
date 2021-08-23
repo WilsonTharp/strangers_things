@@ -12,14 +12,14 @@ import {
     Route,
     Switch
   } from 'react-router-dom';
-import { fetchUserPosts, deleteUserPost } from "../API/index.js";
+import { fetchUserPosts, deleteUserPost, postUserPost } from "../API/index.js";
 
 
 
-const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
-    const [featuredPost, setFeaturedPost] = useState(null);
+const Posts = ({isLoggedin, userPosts, setUserPosts, featuredPost, setFeaturedPost}) => {
     const [createPost, setCreatePost] = useState(false);
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('');
+    const [post, setPost] = useState({title: '', description: '', price: '', location: '', willDeliver: false});
 
     const filteredPosts = search.length === 0 ?
                           userPosts :
@@ -31,13 +31,23 @@ const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
 
     useEffect(() => {
         fetchUserPosts(setUserPosts)
-    },[featuredPost, createPost, deletePost])
+    },[])
 
-    
-    async function deletePost(e, id) {
+    function deletePost(e, id) {
         e.preventDefault();
-        await deleteUserPost(id);
+        deleteUserPost(id);
         fetchUserPosts(setUserPosts);
+    }
+    function handleSubmit(event) {
+        event.preventDefault();
+        postUserPost(post);
+        setCreatePost(false);
+        fetchUserPosts(setUserPosts);
+    }
+    function handleChange(event, postKey) {
+        const newState = {...post};
+        {postKey === 'willDeliver' ? newState[postKey] = event.target.checked ? true : false : newState[postKey] = event.target.value};
+        setPost(newState);
     }
     return (
         <div id="posts-page">
@@ -61,7 +71,11 @@ const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
             </div>
             {
                 createPost &&
-                <CreatePost setCreatePost={setCreatePost}/>
+                <CreatePost setCreatePost={setCreatePost}
+                            handleSubmit={handleSubmit}
+                            handleChange={handleChange}
+                            post={post}
+                            setPost={setPost}/>
             }
             <hr></hr>
             <div className="post-list">
@@ -78,6 +92,7 @@ const Posts = ({isLoggedin, userPosts, setUserPosts}) => {
                           isAuthor={post.isAuthor}
                           postId={post._id}
                           deletePost={deletePost}
+                          setUserPosts={setUserPosts}
                         />
             )
              }   

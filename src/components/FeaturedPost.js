@@ -7,7 +7,6 @@ import { postUserMessage } from '../API';
 const FeaturedPost = ({featuredPost, setFeaturedPost, isLoggedin}) => {
 
     const [messageContent, setMessageContent] = useState({content: ''});
-
     const postId = featuredPost._id;
     const isAuthor = featuredPost.isAuthor;
 

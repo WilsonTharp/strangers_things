@@ -4,21 +4,7 @@ import { FaTimesCircle } from 'react-icons/fa'
 import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
 import { postUserPost } from '../API';
 
-const CreatePost = ({setCreatePost}) => {
-
-    const [post, setPost] = useState({title: '', description: '', price: '', location: '', willDeliver: false});
-
-    function handleChange(event, postKey) {
-        const newState = {...post};
-        {postKey === 'willDeliver' ? newState[postKey] = event.target.checked ? true : false : newState[postKey] = event.target.value};
-        setPost(newState);
-    }
-
-    async function handleSubmit(event) {
-        event.preventDefault();
-        await postUserPost(post);
-        setCreatePost(false);
-    }
+const CreatePost = ({setCreatePost, handleSubmit, handleChange}) => {
 
     return (
         <div className="create-post">

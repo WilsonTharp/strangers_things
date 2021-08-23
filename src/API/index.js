@@ -128,3 +128,19 @@ export function postUserMessage(id, message) {
     })
         .catch(console.error);
 }
+
+export async function getMessages(setMessages) {
+    try{const response = await fetch(`${BASE_URL}users/me`, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+        const result = await response.json()
+        console.log(result)
+        setMessages(result.data.messages)
+    
+    } catch (error) {
+        console.error(error);
+    }
+}
