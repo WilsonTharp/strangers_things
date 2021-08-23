@@ -33,10 +33,11 @@ const Profile = ({getMessages, userPosts, setUserPosts, featuredPost, setFeature
     })
 
     return(
+        <>
+        <h1>Welcome {localStorage.getItem("username")}</h1>
         <div id = "profile">
-            <h1>Welcome {localStorage.getItem("username")}</h1>
-                <h3>Messages To Me</h3>
             <div className="messagesToMe">
+            <h3>Messages To Me</h3>
                 {
                 messagesToMe.map((messages, i) => {
                     return (
@@ -52,8 +53,9 @@ const Profile = ({getMessages, userPosts, setUserPosts, featuredPost, setFeature
                     })
                 }
             </div>
-            <h3>Messages from Me</h3>
             <div className="messagesFromMe">
+            <h3>Messages from Me</h3>
+
                 {
                 messagesFromMe.map((messages, i) => {
                     return (
@@ -80,6 +82,7 @@ const Profile = ({getMessages, userPosts, setUserPosts, featuredPost, setFeature
             } 
 
          </div>    
+        </>
     )
 }
 

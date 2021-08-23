@@ -155,7 +155,9 @@ hr {
 }
 
 .message {
-    background-color: whitesmoke;
+    background-color: white;
+    margin-left: 1rem;
+    margin-right: 1rem;
     margin-bottom: 1rem;
     padding-left: 20px;
     padding-top: 1px;
@@ -164,8 +166,7 @@ hr {
     border-width: .1px;
     border-radius: 10px;
     border-color: black;
-    background-color: lightgrey;
-    box-shadow: 0 2px 8px black;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, .2);
 }
 
 #message {
@@ -173,4 +174,9 @@ hr {
     align-items: center;
     text-align: center;
     margin: auto;
+}
+
+#profile {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
