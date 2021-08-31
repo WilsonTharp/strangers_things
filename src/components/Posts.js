@@ -7,11 +7,7 @@ import {
     UserPost,
     Search
 } from './index.js'
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch
-  } from 'react-router-dom';
+
 import { fetchUserPosts, deleteUserPost, postUserPost } from "../API/index.js";
 
 
@@ -61,7 +57,7 @@ const Posts = ({isLoggedin, userPosts, setUserPosts, featuredPost, setFeaturedPo
                     isLoggedin &&
                     <Button variant="outlined"
                         color="primary"
-                        style={{height: '3rem', marginTop: '.8rem'}}
+                        style={{height: '3rem', marginTop: '.8rem', color: 'white'}}
                         onClick={(event) => {
                             event.preventDefault();
                             setCreatePost(true);

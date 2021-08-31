@@ -13,7 +13,7 @@ const UserPost = ({post, title, description, price, username, location, setFeatu
             <h4><b>Location: </b>{location}</h4>
             <Button variant="outlined"
                     color="primary"
-                    style={{marginBottom:"1rem"}}
+                    style={{marginBottom:"1rem", color: 'white'}}
                     onClick={(event) => {
                         event.preventDefault();
                         setFeaturedPost(post);
